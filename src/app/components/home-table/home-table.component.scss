@@ -1,0 +1,75 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$spectrum-theme-primary: mat-palette($mat-yellow);
+$spectrum-theme-accent: mat-palette($mat-teal);
+$spectrum-theme-warn: mat-palette($mat-red);
+
+$spectrum-theme: mat-dark-theme(
+    $spectrum-theme-primary,
+    $spectrum-theme-accent,
+    $spectrum-theme-warn
+);
+
+@include angular-material-theme($spectrum-theme);
+.controls-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    .selection-group {
+        display: flex;
+        align-items: center;
+        &:first-child {
+            margin-right: 2rem;
+        }
+    }
+    .additional-data {
+        margin-left: 10rem;
+        min-width: 30rem;
+        > div {
+            display: flex;
+            flex-wrap: wrap;
+            &:first-child {
+                margin-bottom: 0.5rem;
+            }
+            > div {
+                &:first-child {
+                    width: 50%;
+                    margin-right: 2rem;
+                }
+            }
+        }
+        .adata-label {
+            font-weight: bold;
+            color: rgb(182, 3, 92);
+        }
+        .adata-value {
+            font-style: normal;
+        }
+    }
+    h2 {
+        margin-right: 2rem;
+    }
+}
+#spinner-and-table-wrapper {
+    position: relative;
+    .spinner-wrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        justify-content: space-around;
+        z-index: 10;
+    }
+}
+div.home-table-container {
+    background: url(formosa-photo.jpg) 100% no-repeat;
+    > table {
+        width: 30%;
+        opacity: 0.9;
+        align-items: center;
+    }
+}

@@ -1,0 +1,84 @@
+<div class="controls-container">
+
+    <!-- Pathway selector -->
+    <div class="selection-group">
+        <h2>Pathway:</h2>
+
+        <mat-form-field>
+            <mat-select placeholder="{{ 'select_pathway' | translate }}" [(value)]="selectedPathway" (selectionChange)="onSelectPathway($event)">
+                <mat-option *ngFor="let pathway of pathways" [value]="pathway.value">
+                    {{pathway.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <!-- Averages selector -->
+    <div class="selection-group">
+        <h2>Average:</h2>
+
+        <mat-form-field>
+            <mat-select placeholder="{{ 'select_data_average_interval' | translate }}" [(value)]="selectedAverage"
+                (selectionChange)="onSelectAverage($event)">
+                <mat-option *ngFor="let average of averages" [value]="average.value">
+                    {{average.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <!-- Additional data -->
+    <div class="additional-data">
+        <div>
+            <div>
+                <span class="adata-label">{{ 'label.signal' | translate }}</span>:
+                <span class="adata-value">{{ ad_signal ? (ad_signal | number) : 'N/A' }}</span>
+            </div>
+            <div>
+                <span class="adata-label">{{ 'label.shelter-temp' | translate }}</span>:
+                <span class="adata-value">{{ ad_shelter_temp ? (ad_shelter_temp | number) : 'N/A' }}</span>
+            </div>
+        </div>
+        <div>
+            <div>
+                <span class="adata-label">{{ 'label.amb-pressure' | translate }}</span>:
+                <span class="adata-value">{{ ad_amb_pressure ? (ad_amb_pressure | number) : 'N/A' }}</span>
+            </div>
+            <div>
+                <span class="adata-label">{{ 'label.amb-temp' | translate }}</span>:
+                <span class="adata-value">{{ ad_amb_temp ? (ad_amb_temp | number) : 'N/A' }}</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="spinner-and-table-wrapper">
+
+    <div class="spinner-wrapper" *ngIf="showSpinner">
+        <mat-spinner class="mat-spinner"></mat-spinner>
+    </div>
+
+    <div class="mat-elevation-z8 home-table-container">
+        <table mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+            <!-- name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                <td align="center" mat-cell *matCellDef="let row">
+                    <strong>{{row.name}}</strong>
+                </td>
+            </ng-container>
+
+            <!-- value -->
+            <ng-container matColumnDef="value">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Value</th>
+                <td align="center" mat-cell *matCellDef="let row">{{row.value}}</td>
+            </ng-container>
+
+            <!--removing below removes header row from table-->
+            <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> -->
+            
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>
